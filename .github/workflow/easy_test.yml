@@ -1,5 +1,8 @@
 name: Run Django Test
-on: [ workflow_dispatch ]
+on: 
+workflow_dispatch:
+  branches:
+    - feature-infra
 
 jobs:
   test:
@@ -16,7 +19,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
-          
+
       # pythonのパッケージインストール
       - name: Install Dependencies
         run: |
