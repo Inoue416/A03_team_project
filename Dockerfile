@@ -12,15 +12,20 @@ COPY ./tmp /app
 WORKDIR /app
 
 EXPOSE 8000
-
+    # venv 作成
 RUN python -m venv /py && \
+    # pipのアップグレード
     /py/bin/pip install --upgrade pip && \
+    # パケージをインストール（alpine linuxなどapk（パッケージマネージャー）を使っている）
     apk add --update --no-cache postgresql-client && \
     apk add --update --no-cache --virtual .tmp-build-deps \
         build-base postgresql-dev musl-dev && \
+    # pythonのパッケージをインストール
     /py/bin/pip install -r /tmp/requirements.txt && \
+    # 要らないものを削除
     rm -rf /tmp && \
     apk del .tmp-build-deps && \
+    # 開発用のユーザ作成
     adduser \
         --disabled-password \
         --no-create-home \
