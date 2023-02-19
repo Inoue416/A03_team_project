@@ -1,0 +1,4 @@
+venv/
+tmp/
+a03_team_project/a03_team_project/__pycache__
+a03_team_project/app/__pycache__
