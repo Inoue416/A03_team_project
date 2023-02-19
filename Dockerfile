@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /tmp/requirements.txt
 # HACK:ここの「./app」は仮置き
-COPY ./tmp /app
+COPY ./app/ /app/
 
 WORKDIR /app
 
