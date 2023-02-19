@@ -1,5 +1,5 @@
 from django.db import models
-from students import Students
+from app.models.students import Students
 
 class StudentFollow(models.Model):
     student_id = models.ForeignKey(Students, null=False, on_delete=models.CASCADE)
@@ -8,4 +8,4 @@ class StudentFollow(models.Model):
     updated_at = models.DateField(auto_now_add=True)
 
     class Meta:
-        db_name = 'student_follow'
+        db_table = 'student_follow'

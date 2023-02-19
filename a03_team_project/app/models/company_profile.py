@@ -1,5 +1,5 @@
 from django.db import models
-from companies import Companies
+from app.models.companies import Companies
 
 
 class CompanyProfile(models.Model):
@@ -10,4 +10,4 @@ class CompanyProfile(models.Model):
     updated_at = models.DateField(auto_now_add=True)
 
     class Meta:
-        db_name = 'company_profile'
+        db_table = 'company_profile'

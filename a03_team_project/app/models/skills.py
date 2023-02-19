@@ -8,4 +8,4 @@ class Skills(models.Model):
     updated_at = models.DateField(auto_now_add=True)
 
     class Meta:
-        db_name = 'skills'
+        db_table = 'skills'
