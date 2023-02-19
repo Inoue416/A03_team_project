@@ -1,5 +1,5 @@
 from django.db import models
-from companies import Companies
+from app.models.companies import Companies
 
 class CompanyMarkDown(models.Model):
     id = models.CharField(max_length=255, null=False, primary_key=True)
@@ -9,4 +9,4 @@ class CompanyMarkDown(models.Model):
     updated_at = models.DateField(auto_now_add=True)
 
     class Meta:
-        db_name = 'company_markdown'
+        db_table = 'company_markdown'
