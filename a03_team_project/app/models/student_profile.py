@@ -1,7 +1,7 @@
 from django.db import models
-from students import Students
-from universities import Universities
-from skills import Skills
+from app.models.students import Students
+from app.models.universities import Universities
+from app.models.skills import Skills
 
 
 class StudentProfile(models.Model):
@@ -14,4 +14,4 @@ class StudentProfile(models.Model):
     updated_at = models.DateField(auto_now_add=True)
 
     class Meta:
-        db_name = 'student_profile'
+        db_table = 'student_profile'
