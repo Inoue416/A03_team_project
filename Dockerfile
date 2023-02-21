@@ -7,9 +7,9 @@ ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /tmp/requirements.txt
 # HACK:ここの「./app」は仮置き
-COPY ./tmp /app
+COPY ./a03_team_project /
 
-WORKDIR /app
+WORKDIR /a03_team_project
 
 EXPOSE 8000
     # venv 作成
