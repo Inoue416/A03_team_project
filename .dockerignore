@@ -1,0 +1,15 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.docker
+
+# python
+# HACK:appは仮置き
+__pycache__/
+.venv/
+venv/
+
+# env
+.env/
