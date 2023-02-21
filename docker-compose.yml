@@ -8,7 +8,7 @@ services:
       - "8000:8000"
     # HACK:個々の./tmpはDjangoのプロジェクト名次第で変更
     volumes:
-      - ./tmp:/a03_team_project
+      - ./tmp:/app
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
     environment:
@@ -16,6 +16,7 @@ services:
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=changeme
+
     depends_on:
       - db
 
