@@ -53,6 +53,7 @@ class UserManager(BaseUserManager):
                 
         user = self.model(name=name, email=self.normalize_email(email))
         user.set_password(password)
+        user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
         
@@ -65,6 +66,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     is_student = models.BooleanField(default=False)
     is_company = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, )
     updated_at = models.DateTimeField(auto_now_add=True)
     
