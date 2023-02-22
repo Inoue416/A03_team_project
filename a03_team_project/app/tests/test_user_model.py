@@ -57,9 +57,11 @@ class UserTest(TestCase):
             ['test4@example.COM', 'test4@example.com'],
         ]
         
+        email_counta = 1
         for email, expected in sample_emails:
-            user = get_user_model().objects.create_user('テスト太郎', email, 'test1234', is_student=True)
+            user = get_user_model().objects.create_user(f'テスト太郎{email_counta}', email, 'test1234', is_student=True)
             self.assertEqual(user.email, expected)
+            email_counta += 1
         
     
     # HACK：関数名：roleがしっくりこない。（下の２つのテスト）
