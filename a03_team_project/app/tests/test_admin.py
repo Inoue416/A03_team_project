@@ -11,7 +11,6 @@ class AdminSiteTest(TestCase):
         self.client = Client()
         self.admin_user = get_user_model().objects.create_superuser(
             name='スーパーテスト太郎',
-            email='testadmin@example.com',
             password='testadmin1234',   
         )
         self.client.force_login(self.admin_user)
@@ -28,7 +27,6 @@ class AdminSiteTest(TestCase):
         res = self.client.get(url)
         
         self.assertContains(res, self.user.name)
-        self.assertContains(res, self.user.email)
 
     def test_edit_uesr_page(self):
         """編集ページのテスト"""

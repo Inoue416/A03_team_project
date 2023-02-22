@@ -39,19 +39,21 @@ class UserManager(BaseUserManager):
         
         return user
         
-    def create_superuser(self, name, email, password):
+    def create_superuser(self, name, password):
         # 名無しのハンドル
         if not name:
             raise ValueError('名前が含まれていません')
         # emailなしのハンドル
-        if not email:
-            raise ValueError('emailが含まれていません。')
+        # NOTE:Django Adminで用意されている。superuser作成はnameとpasswordだけなので、その使用に合わせるためにemailを削除
+        # HACK：もし、Emailも欲しいなら、しっかりクラスをたどって、自作していく必要がある。
+        # if not email:
+        #     raise ValueError('emailが含まれていません。')
         # パスワードなしのハンドル
         if not password:
             raise ValueError('パスワードが設定されていません')
         
                 
-        user = self.model(name=name, email=self.normalize_email(email))
+        user = self.model(name=name)
         user.set_password(password)
         user.is_staff = True
         user.is_superuser = True
