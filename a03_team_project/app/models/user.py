@@ -60,8 +60,13 @@ class UserManager(BaseUserManager):
         return user
     
 class User(AbstractBaseUser, PermissionsMixin):
-    
     """User モデル"""
+    
+    # Meta info
+    class Meta:
+        app_label = 'app'
+    
+    # Fields
     name = models.CharField(max_length=255)
     email = models.EmailField(max_length=255, unique=True)
     is_student = models.BooleanField(default=False)
@@ -70,12 +75,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True, )
     updated_at = models.DateTimeField(auto_now_add=True)
     
+    # object manaeger
     objects = UserManager()
     
-    # Django shell用に指定
-    # HACK:名前だとuniqueではない。
-    USERNAME_FIELD = 'name'
+    # username field
+    # HACK:被るとwarningがでるので、とりあえずidにしている。アイディアくれたら嬉しいです。
+    USERNAME_FIELD = 'id'
     
-    class Meta:
-        app_label = 'app'
-        
+    # NOTE:名前だけだと、可能性があるので、idとnameにオーバライド
+    def __str__(self):
+        return f"{self.id}: {self.name}"
