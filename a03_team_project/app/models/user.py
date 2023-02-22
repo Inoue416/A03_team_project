@@ -12,39 +12,33 @@ from django.contrib.auth.models import (
 class UserManager(BaseUserManager):
     """ユーザのオブジェクトマネージャ"""
     
+    # NOTE:バリデーション系は抽象化する。置き場所どうしようか？
+    
     def create_user(self, name, email, password, **extra_fields):
         # 名無しのハンドル
-        if not name:
-            raise ValueError('名前が含まれていません')
+        if not name: raise ValueError('名前が含まれていません')
         # emailなしのハンドル
-        if not email:
-            raise ValueError('emailが含まれていません。')
+        if not email: raise ValueError('emailが含まれていません。')
         # パスワードなしのハンドル
-        if not password:
-            raise ValueError('パスワードが設定されていません')
-        
+        if not password: raise ValueError('パスワードが設定されていません')
                 
         user = self.model(name=name, email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         
-        # if not (user.is_student ^ user.is_company):
-        #     raise ValueError('生徒か企業のどっちかを選んでください')
-            
-        
         # 生徒と会社どっちも選ばれてない場合のハンドル
-        # HACK：ValueErrorというエラーはよろしくない気が
+        # HACK：ValueErrorというエラーはよろしくないかも
         if user.is_student and user.is_company:
             raise ValueError('生徒か企業のどちらか一つを選んでください')
         
         # HACK：ValueErrorというエラーはよろしくない気が
-        # HACK:not (user.is_student or user.is_company)が使えなかったので、下記の条件式に
+        # HACK:条件式をもっとスマートに書きたい。not (user.is_student or user.is_company)が使えなかったので、下記の条件式に。
         if user.is_company == False and user.is_student == False:
             raise ValueError('生徒か企業のどっちか一つだけを選んでください')
         
         user.save(using=self.db)
         
         return user
-    
+        
     def create_superuser(self, name, email, password):
         # 名無しのハンドル
         if not name:
