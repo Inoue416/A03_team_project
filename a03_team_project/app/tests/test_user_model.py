@@ -19,7 +19,8 @@ class UserTest(TestCase):
         user = get_user_model().objects.create_user(
             name=name,
             email=email,
-            password=password
+            password=password,
+            is_student=True,
         )
         
         self.assertEqual(user.name, name)
@@ -48,33 +49,33 @@ class UserTest(TestCase):
             get_user_model().objects.create_user('テスト太郎', 'test@example.com', '')
      
     def test_email_normalized(self):
-        """不規則なEamilの場合に普通のフォーマットにしているかのテスト"""
+        """不規則なEmailの場合に普通のフォーマットにしているかのテスト"""
         
         sample_emails = [
             ['test1@EXAMPLE.com', 'test1@example.com'],
-            ['Test2@Example.com', 'Test1@example.com'],
+            ['Test2@Example.com', 'Test2@example.com'],
             ['TEST3@EXAMPLE.com', 'TEST3@example.com'],
             ['test4@example.COM', 'test4@example.com'],
         ]
         
         for email, expected in sample_emails:
-            user = get_user_model().objects.create_user('テスト太郎', email, 'test1234')
+            user = get_user_model().objects.create_user('テスト太郎', email, 'test1234', is_student=True)
             self.assertEqual(user.email, expected)
         
     
     # HACK：関数名：roleがしっくりこない。（下の２つのテスト）
     
     def test_without_role_raise_error(self):
-        """生徒でも、会社でもない場合のテスト"""
+        """生徒でも、企業でもない場合のテスト"""
         # HACK:エラーは自作するべきかも。とりあえずのValueError
         with self.assertRaises(ValueError):
-            get_user_model().objects.create_user('テスト太郎', 'test@example.com', 'test1234', is_sutdent=False, is_company=False)
+            get_user_model().objects.create_user('テスト太郎', 'test@example.com', 'test1234', is_student=False, is_company=False)
             
     def test_with_doble_role_raise_error(self):
         """生徒と会社、どっちものロールになっている場合のテスト"""
         # HACK:自作エラーを使うべきかも、とりあえずのValueError
         with self.assertRaises(ValueError):
-            get_user_model().objects.cerate_user('テスト太郎', 'test@example.com', 'test1234', is_student=True, is_company=True)
+            get_user_model().objects.create_user('テスト太郎', 'test@example.com', 'test1234', is_student=True, is_company=True)
             
     
     
