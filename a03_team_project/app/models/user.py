@@ -69,7 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         app_label = 'app'
     
     # Fields
-    name = models.CharField(max_length=255)
+    name = models.CharField(verbose_name='名前',max_length=255, unique=True)
     email = models.EmailField(max_length=255, unique=True)
     is_student = models.BooleanField(default=False)
     is_company = models.BooleanField(default=False)
@@ -81,8 +81,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     
     # username field
-    # HACK:被るとwarningがでるので、とりあえずidにしている。アイディアくれたら嬉しいです。
-    USERNAME_FIELD = 'id'
+    # HACK:被るとwarningが出る。（nameをuniqueにすることでどうにか、ハンドル）
+    USERNAME_FIELD = 'name'
     
     # NOTE:名前だけだと、可能性があるので、idとnameにオーバライド
     def __str__(self):
