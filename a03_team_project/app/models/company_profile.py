@@ -1,9 +1,8 @@
 from django.db import models
-from users import Users  # 他同様
+from app.models.users import Users  # 他同様
 
 
 class CompanyProfile(models.Model):
-    id = models.AutoField(primary_key=True)
     company_id = models.OneToOneField(Users, on_delete=models.CASCADE)
     outline = models.TextField(null=False, default='作成中')
     businness_contents = models.TextField(null=False, default='作成中')

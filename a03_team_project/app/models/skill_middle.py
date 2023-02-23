@@ -1,11 +1,11 @@
 from django.db import models
-from users import Users
-from skills import Skills
+from app.models.users import Users
+from app.models.skills import Skills
 
 class SkillMiddle(models.Model):
     # idはUsersテーブルのキーをフォーリンキーとして用いる
-    id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    skill_id = models.ForeignKey(Skills, on_delete=models.CASCADE)
+    id = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
+    skill_id = models.ManyToManyField(Skills, related_name='have_skills')
 
     class Meta:
         db_table = 'skill_middle'
