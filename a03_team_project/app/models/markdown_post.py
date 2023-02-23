@@ -12,7 +12,7 @@ class MarkdownPost(models.Model):
     # 画像の挿入も検討したい
     # image =     
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'markdown_post'

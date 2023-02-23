@@ -11,7 +11,7 @@ class StudentProfile(models.Model):
     grade = models.OneToOneField(Grade, on_delete=models.PROTECT)
     icon = models.ImageField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'student_profile'

@@ -10,7 +10,7 @@ class CompanyProfile(models.Model):
     image = models.ImageField(null=True)
     homepage = models.URLField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'company_profile'
