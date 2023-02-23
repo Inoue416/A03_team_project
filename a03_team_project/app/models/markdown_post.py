@@ -2,7 +2,7 @@ from django.db import models
 from users import Users #  他同様Usersモデルによって変更あり
 
 # 開発中に変更があるかも
-class Markdown(models.Model):
+class MarkdownPost(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     # TODO
