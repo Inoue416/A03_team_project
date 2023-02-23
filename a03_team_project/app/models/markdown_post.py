@@ -7,7 +7,8 @@ class MarkdownPost(models.Model):
     # TODO
     # 直接マークダウンを入れるかmdファイルをサーバーに保存し、それをクライアントに返す式にするかで
     # Char(URL)かText(markdown)か変わってくる
-    data = models.CharField(max_length=255, null=False)
+    title = models.CharField(max_length=255, null=False)
+    data = models.TextField(null=False)
     # TODO
     # 画像の挿入も検討したい
     # image =     
