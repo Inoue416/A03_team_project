@@ -3,7 +3,7 @@ from app.models.users import Users #  他同様Usersモデルによって変更�
 
 # 開発中に変更があるかも
 class MarkdownPost(models.Model):
-    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
     # TODO
     # 直接マークダウンを入れるかmdファイルをサーバーに保存し、それをクライアントに返す式にするかで
     # Char(URL)かText(markdown)か変わってくる

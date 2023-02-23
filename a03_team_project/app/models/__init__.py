@@ -10,4 +10,3 @@ from app.models.department_middle import DepartmentMiddle
 from app.models.follow import Follow
 from app.models.markdown_post import MarkdownPost
 from app.models.nice import Nice
-from app.models.users import Users

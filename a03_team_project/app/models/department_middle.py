@@ -3,8 +3,8 @@ from app.models.universities import Universities
 from app.models.department import Department
 
 class DepartmentMiddle(models.Model):
-    university_id = models.ForeignKey(Universities, on_delete=models.DO_NOTHING)
-    department_id = models.ForeignKey(Department, on_delete=models.DO_NOTHING)
+    university = models.ForeignKey(Universities, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
     
     class Meta:
         db_table = 'department_middle'

@@ -4,8 +4,9 @@ from app.models.skills import Skills
 
 class SkillMiddle(models.Model):
     # idはUsersテーブルのキーをフォーリンキーとして用いる
-    id = models.OneToOneField(Users, on_delete=models.CASCADE, primary_key=True)
-    skill_id = models.ManyToManyField(Skills, related_name='have_skills')
+    #id = models.BigAutoField()
+    student = models.ForeignKey(Users, on_delete=models.CASCADE)
+    skill = models.ForeignKey(Skills, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'skill_middle'
