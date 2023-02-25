@@ -13,3 +13,6 @@ venv/
 
 # env
 .env/
+
+# migrations
+/*/*/migrations/*
