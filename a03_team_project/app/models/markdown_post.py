@@ -1,9 +1,9 @@
 from django.db import models
-from app.models.users import Users #  他同様Usersモデルによって変更あり
+from app.models.user import User #  他同様Userモデルによって変更あり
 
 # 開発中に変更があるかも
 class MarkdownPost(models.Model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     # TODO
     # 直接マークダウンを入れるかmdファイルをサーバーに保存し、それをクライアントに返す式にするかで
     # Char(URL)かText(markdown)か変わってくる
