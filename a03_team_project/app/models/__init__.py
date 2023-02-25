@@ -1,4 +1,4 @@
-from app.models.users import Users
+from app.models.user import User
 from app.models.student_profile import StudentProfile
 from app.models.company_profile import CompanyProfile
 from app.models.skills import Skills
