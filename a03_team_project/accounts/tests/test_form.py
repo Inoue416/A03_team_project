@@ -53,6 +53,19 @@ class TestSingupForm(TestCase):
         })
         
         self.assertFalse(form.is_valid())
+        
+    def test_signup_with_different_passwords(self):
+        """パスワードと確認用のパスワードが違う場合のテスト"""
+        email = defaults_data['email']
+        password1 = defaults_data['password']
+        password2 = 'different'
+        form = SignupForm(data={
+            'email': email,
+            'password1': password1,
+            'password2': password2
+        })
+        
+        self.assertFalse(form.is_valid())
     
     
 
