@@ -5,7 +5,11 @@ from django.test import TestCase
 
 from accounts.forms import (
     SignupForm,
+    LoginForm,
 )
+
+# TODO:パスワード変更のForm作成
+
 defaults_data = {
     'email': 'test@example.com',
     'password': 'Tuser!23',
@@ -49,3 +53,45 @@ class TestSingupForm(TestCase):
         })
         
         self.assertFalse(form.is_valid())
+    
+    
+
+class TestLoginForm(TestCase):
+    """ログインのフォームのテスト"""
+    
+    def test_valid_value(self):
+        """通常の入力のログインに対するバリデーションのテスト"""
+        email = defaults_data['email']
+        password = defaults_data['password']
+        
+        form = LoginForm(data={
+            'email':email,
+            'password': password
+        })
+        
+        self.assertTrue(form.is_valid())
+    
+    def test_log_in_with_wrong_email(self):
+        """Invalidなメールアドレスでのログインに対するバリデーションのテスト"""
+        email = 'invalid'
+        password = defaults_data['password']
+        
+        form = LoginForm(data={
+            'email':email,
+            'password': password
+        })
+        
+        self.assertFalse(form.is_valid())
+    
+    def test_log_in_with_Invalid_password(self):
+        """Invalidパスワードでのログインに対するバリデーションのテスト"""
+        email = defaults_data['email']
+        password = 'password'
+        
+        form = LoginForm(data={
+            'email':email,
+            'password': password
+        })
+        
+        self.assertFalse(form.is_valid())
+    
