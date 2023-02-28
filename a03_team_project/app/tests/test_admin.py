@@ -10,13 +10,13 @@ class AdminSiteTest(TestCase):
         """ユーザとクライアントの作成"""
         self.client = Client()
         self.admin_user = get_user_model().objects.create_superuser(
-            name='スーパーテスト太郎',
+            email='admin@example.com',
             password='testadmin1234',   
         )
         self.client.force_login(self.admin_user)
         self.user = get_user_model().objects.create_user(
             name='テスト太郎',
-            email='test@example.com',
+            email='user@example.com',
             password='test1234',
             is_student=True,   
         )
