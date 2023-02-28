@@ -2,6 +2,7 @@
 Tests for auth forms. 
 """
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 
 from accounts.forms import (
     SignupForm,
@@ -10,9 +11,11 @@ from accounts.forms import (
 
 # TODO:パスワード変更のForm作成
 
-defaults_data = {
+test_data = {
+    'name': 'Test Name',
     'email': 'test@example.com',
-    'password': 'Tuser!23',
+    'password': 'TestUser!23',
+    'choice': '生徒'
 }
 
 class TestSingupForm(TestCase):
@@ -20,49 +23,51 @@ class TestSingupForm(TestCase):
     
     def test_signup_with_vailid_value(self):
         """通常の入力のサインアップのバリデーション"""
-        email= defaults_data['email']
-        password = defaults_data['password']
         form = SignupForm(data={
-            'email': email,
-            'password1': password,
-            'password2': password,
+            'name': test_data['name'],
+            'email': test_data['email'],
+            'password1': test_data['password'],
+            'password2': test_data['password'],
+            'choice': test_data['choice']
         })
         
         self.assertTrue(form.is_valid())
         
     def test_signup_with_invalid_email(self):
         """Invalidなメールアドレスに対するバリデーションのテスト"""
-        email = 'invalid'
-        password = defaults_data['password']
+        invalid_email = 'invalid'
         form = SignupForm(data={
-            'email': email,
-            'password1': password,
-            'password2': password,
+            'name': test_data['name'],
+            'email': invalid_email,
+            'password1': test_data['password'],
+            'password2': test_data['password'],
+            'choice': '生徒',
         })
         
         self.assertFalse(form.is_valid())
     
     def test_signup_with_invalid_password(self):
         """Invalidなパスワードに対するバリデーションのテスト"""
-        email = defaults_data['email']
-        password = 'password'
+        invalid_password = 'password'
         form = SignupForm(data={
-            'email': email,
-            'password1': password,
-            'password2': password,
+            'name': test_data['name'],
+            'email': test_data['email'],
+            'password1': invalid_password,
+            'password2': invalid_password,
+            'choice': '生徒',
         })
         
         self.assertFalse(form.is_valid())
         
     def test_signup_with_different_passwords(self):
         """パスワードと確認用のパスワードが違う場合のテスト"""
-        email = defaults_data['email']
-        password1 = defaults_data['password']
         password2 = 'different'
         form = SignupForm(data={
-            'email': email,
-            'password1': password1,
-            'password2': password2
+            'name': test_data['name'],
+            'email': test_data['email'],
+            'password1': test_data['password'],
+            'password2': password2,
+            'choice': '生徒',
         })
         
         self.assertFalse(form.is_valid())
@@ -72,39 +77,44 @@ class TestSingupForm(TestCase):
 class TestLoginForm(TestCase):
     """ログインのフォームのテスト"""
     
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            name=test_data['name'],
+            email=test_data['email'],
+            password=test_data['password'],
+            is_student=True,
+        )
+    
     def test_valid_value(self):
         """通常の入力のログインに対するバリデーションのテスト"""
-        email = defaults_data['email']
-        password = defaults_data['password']
-        
         form = LoginForm(data={
-            'email':email,
-            'password': password
+            'email': self.user.email,
+            'password': test_data['password'],
         })
         
         self.assertTrue(form.is_valid())
     
     def test_log_in_with_wrong_email(self):
         """Invalidなメールアドレスでのログインに対するバリデーションのテスト"""
-        email = 'invalid'
-        password = defaults_data['password']
+        invalid_email = 'invalid'
+        
         
         form = LoginForm(data={
-            'email':email,
-            'password': password
+            'email':invalid_email,
+            'password': test_data['password']
         })
         
         self.assertFalse(form.is_valid())
     
     def test_log_in_with_Invalid_password(self):
         """Invalidパスワードでのログインに対するバリデーションのテスト"""
-        email = defaults_data['email']
-        password = 'password'
+        invalid_password = 'password'
         
         form = LoginForm(data={
-            'email':email,
-            'password': password
+            'email':test_data['email'],
+            'password': invalid_password
         })
         
         self.assertFalse(form.is_valid())
-    
+
+# class PasswordChangeFrom()
