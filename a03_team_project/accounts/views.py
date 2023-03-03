@@ -23,11 +23,10 @@ class LoginView(LoginView):
     template_name = 'registration/login.html'
     redirect_authenticated_user = True
     
-
-class LogoutView(LogoutView):
-    """ログアウトのビュー"""
-    # NOTE:ログインページでボタンをおしたら、ログアウトするようにするためにどうする？
-    template_name = 'registration/login.html'
+# NOTE:template_nameだけなので、urls.pyで指定していいかも
+# class LogoutView(LogoutView):
+#     """ログアウトのビュー"""
+#     template_name = 'registration/login.html'
 
 class PsswordChangeView():
     """パスワード変更のビュー"""
