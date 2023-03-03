@@ -42,10 +42,10 @@ class SignupForm(UserCreationForm):
         user = get_user_model()(
             name=self.cleaned_data['name'],
             email=self.cleaned_data['email'],
-            password=self.cleaned_data['password1'],
             is_student=is_student,
             is_company=is_company,
         )
+        user.set_password(self.cleaned_data["password1"])
         # commit引数によって、DBに保存するorしない
         if commit:
             user.save()
