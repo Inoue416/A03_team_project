@@ -25,7 +25,7 @@ class SignUpView(CreateView):
         """
         form = self.get_form()
         if form.is_valid():
-            messages.info(request, 'サインアップしました', extra_tags='"primary"')
+            messages.info(request, 'サインアップしました', extra_tags="primary")
             return self.form_valid(form)
         else:
             messages.error(request, 'サインアップできませんでした', extra_tags="danger")
@@ -47,7 +47,7 @@ class LoginView(LoginView):
         
         form = self.get_form()
         if form.is_valid():
-            messages.info(request, 'ログインしました。', extra_tags='"primary"')
+            messages.info(request, 'ログインしました。', extra_tags="primary")
             return self.form_valid(form)
         else:
             messages.error(request, 'ログインできませんでした', extra_tags="danger")
