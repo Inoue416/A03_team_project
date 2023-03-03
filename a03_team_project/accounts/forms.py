@@ -69,9 +69,9 @@ class LoginForm(forms.Form):
         'inactive': _("This account is inactive"),
     }
     
-    def __init__(self, *args, **kwargs):
+    def __init__(self, request=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.request = kwargs.get('request')
+        self.request = request
         self.user_cash = None
         # wiget style settings
         self.fields['email'].widget.attrs['class'] = 'form-control'
