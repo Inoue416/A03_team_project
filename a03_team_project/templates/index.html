@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <body>
+    {% for message in messages %}
+    <div>
+        <span>{{ message }}</span>
+    </div>
+    {% endfor %}
     <h1>Hello This is home</h1>
 </body>
 </html>
