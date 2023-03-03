@@ -13,7 +13,7 @@ class SignupForm(UserCreationForm):
     """サインアップ用のフォーム"""
     
     # extra fields
-    choice = forms.ChoiceField(choices=(('生徒', '生徒'), ('企業', '企業')))
+    choice = forms.ChoiceField(label='学生 or 企業', choices=(('生徒', '生徒'), ('企業', '企業')))
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
