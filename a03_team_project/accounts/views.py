@@ -1,6 +1,10 @@
-from django.shortcuts import render
 from django.views.generic import CreateView
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import (
+    LoginView,
+    LogoutView,
+    PasswordChangeView,
+    PasswordChangeDoneView
+)
 from django.contrib import messages
 
 from accounts.forms import SignupForm, LoginForm
@@ -53,3 +57,30 @@ class LoginView(LoginView):
             messages.error(request, 'ログインできませんでした', extra_tags="danger")
             return self.form_invalid(form)
     
+class CustomLogoutView(LogoutView):
+    
+    # HACK: templateを表示して、リダイレクトするような仕組みになっており、リダイレクトした後に（メッセージミドルウェアの）メッセージを表示できなくなってしまう。
+    # 　　メッセージを表示する対策としてtemplateにホームページのテンプレートを指定して、リダイレクトしないことによって、メッセージが表示されるような形にしている。
+    template_name = 'index.html'
+    
+    def get(self, request, *args, **kwargs):
+        messages.info(request, 'ログアウトしました', extra_tags="primary")
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
+
+class CustomPasswordChangeView(PasswordChangeView):
+    
+    success_url = '/'
+    
+    def post(self, request, *args, **kwargs):
+        """
+        Handle POST requests: instantiate a form instance with the passed
+        POST variables and then check if it's valid.
+        """
+        form = self.get_form()
+        if form.is_valid():
+            messages.info(request, 'パスワードを変更しました', extra_tags="primary")
+            return self.form_valid(form)
+        else:
+            messages.info(request, 'パスワードを変更できませんでした', extra_tags='danger')
+            return self.form_invalid(form)
