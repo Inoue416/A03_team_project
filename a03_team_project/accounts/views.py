@@ -27,6 +27,7 @@ class SignUpView(CreateView):
         Handle POST requests: instantiate a form instance with the passed
         POST variables and then check if it's valid.
         """
+        self.object = None
         form = self.get_form()
         if form.is_valid():
             messages.info(request, 'サインアップしました', extra_tags="primary")
