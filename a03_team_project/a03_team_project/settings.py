@@ -24,7 +24,7 @@ SECRET_KEY = 'example'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -36,8 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
-    # 'profiles'
+    'django_bootstrap5',
+    'app',
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ] 
 
 AUTH_USER_MODEL = 'app.User'
+
+# プロフィールの画像をを保存
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
