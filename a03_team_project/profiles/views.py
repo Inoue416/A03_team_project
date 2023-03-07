@@ -41,17 +41,17 @@ class CompanyProfileCreateView(CreateView):
 #     success_url = '/'
 
 
-class StudentProfileCreateView(CreateView):
-    template_name = 'profile/student.html'
-    form_class = StudentMultiForm
-    success_url = '/'
+# class StudentProfileCreateView(CreateView):
+#     template_name = 'profile/student.html'
+#     form_class = StudentMultiForm
+#     success_url = '/'
 
-    def form_valid(self, form):
-        qryset = form.save(commit=False)
-        qryset.student = self.request.user
-        qryset.save()
+#     def form_valid(self, form):
+#         qryset = form.save(commit=False)
+#         qryset.student = self.request.user
+#         qryset.save()
 
-        return self.form_valid(form)
+#         return self.form_valid(form)
 
-    def form_invalid(self, form):
-        return self.form_invalid(form)
+#     def form_invalid(self, form):
+#         return self.form_invalid(form)

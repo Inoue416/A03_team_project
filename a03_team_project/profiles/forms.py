@@ -36,14 +36,14 @@ class CompanyForm(forms.ModelForm):
 
             return company
 
-class StudentForm(forms.ModelForm):
-    class Meta:
-        model = StudentProfile
-        fields = ['icon']
+# class StudentForm(forms.ModelForm):
+#     class Meta:
+#         model = StudentProfile
+#         fields = ['icon']
 
-        labels = {
-            'icon': 'プロフィール画像'
-        }
+#         labels = {
+#             'icon': 'プロフィール画像'
+#         }
 
         # def save(self, commit=True):
         #     student = super(StudentForm, self).save(commit=commit)
@@ -53,44 +53,44 @@ class StudentForm(forms.ModelForm):
 
         #     return student
 
-class UniversityForm(forms.ModelForm):
-    class Meta:
-        model = Universities
-        fields = ['name']
+# class UniversityForm(forms.ModelForm):
+#     class Meta:
+#         model = Universities
+#         fields = ['name']
 
-        labels = {
-            'name': '大学'
-        }
+#         labels = {
+#             'name': '大学'
+#         }
 
-class GradeForm(forms.ModelForm):
-    class Meta:
-        model = Grade
-        fields = ['grade']
+# class GradeForm(forms.ModelForm):
+#     class Meta:
+#         model = Grade
+#         fields = ['grade']
 
-        labels = {
-            'grade': '学年'
-        }
+#         labels = {
+#             'grade': '学年'
+#         }
 
-class StudentMultiForm(MultiModelForm):
+# class StudentMultiForm(MultiModelForm):
 
-    class Meta:
-        form_classes = {
-            'StudentProfile': StudentForm,
-            'Universities': UniversityForm,
-            'Grade': GradeForm,
-        }
+#     class Meta:
+#         form_classes = {
+#             'StudentProfile': StudentForm,
+#             'Universities': UniversityForm,
+#             'Grade': GradeForm,
+#         }
 
-        def __init__(self, user, *args, **kwargs):
-            self.login_user = user
-            super().__init__(*args, **kwargs)
+#         def __init__(self, user, *args, **kwargs):
+#             self.login_user = user
+#             super().__init__(*args, **kwargs)
 
-        def save(self, **kwargs):
-            student = StudentProfile(
-                university = self.cleaned_data['name'],
-                grade = self.cleaned_data['grade'],
-                icon = self.cleaned_data['icon']
-            ),
+#         def save(self, **kwargs):
+#             student = StudentProfile(
+#                 university = self.cleaned_data['name'],
+#                 grade = self.cleaned_data['grade'],
+#                 icon = self.cleaned_data['icon']
+#             ),
 
-            student.save()
+#             student.save()
 
-            return student
+#             return student
