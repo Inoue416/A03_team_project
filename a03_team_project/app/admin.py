@@ -14,6 +14,7 @@ from app.models.department_middle import DepartmentMiddle
 from app.models.follow import Follow
 from app.models.markdown_post import MarkdownPost
 from app.models.nice import Nice
+from app.models.comment import Comment
 
 # Register your models here.
 class UserAdmin(UserAdmin):
@@ -92,6 +93,9 @@ class FollowAdmin(admin.ModelAdmin):
 class MarkdownPostAdmin(admin.ModelAdmin):
     pass
 
+class CommentAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Universities, UniversitiesAdmin)
 admin.site.register(Nice, NiceAdmin)
@@ -103,4 +107,5 @@ admin.site.register(Grade, GradeAdmin)
 admin.site.register(Department, DepartmentAdmin)
 admin.site.register(DepartmentMiddle, DepartmentMiddleAdmin)
 admin.site.register(Follow, FollowAdmin)
-admin.site.register(MarkdownPost, )
+admin.site.register(MarkdownPost, MarkdownPostAdmin)
+admin.site.register(Comment, CommentAdmin)
