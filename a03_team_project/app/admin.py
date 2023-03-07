@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
-# from app.models import User
-
 from app.models import (
     User,
     StudentProfile,
@@ -17,6 +15,7 @@ from app.models import (
     Follow,
     MarkdownPost,
     Nice,
+    Comment
 )
 
 # Register your models here.
@@ -75,3 +74,4 @@ admin.site.register(DepartmentMiddle)
 admin.site.register(Follow)
 admin.site.register(MarkdownPost)
 admin.site.register(Nice)
+admin.site.register(Comment)

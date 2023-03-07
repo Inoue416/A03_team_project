@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}COMMENT FORM{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>コメント</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.markdown_id }}
+        {{ form.comment }}
+        <div>
+            <button type="submit" class="btn btn-primary me-3">決定</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    // 初期値としてマークダウンのidをhiddenに入れる
+    let md_id = {{ markdown_id|safe }};
+    let md_id_filed = document.querySelector('#markdown-id');
+    md_id_filed.value = md_id;
+</script>
+{% endblock %}
