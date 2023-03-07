@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+    ホームページ
+{% endblock %}
+{% block content %}
+    <h1>Hello This is home</h1>
+    <hr>
+    <div>※仮の置きのリンク👇</div>
+    <a href="/accounts/signup">サインアップへ</a>
+    <a href="/accounts/login">ログインへ</a>
+    <a href="/accounts/logout">ログアウト</a>
+    <a href="accounts/password_change">パスワード変更へ</a>
+{% endblock %}

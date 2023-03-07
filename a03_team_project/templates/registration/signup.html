@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+  サインアップページ
+{% endblock %}
+
+{% block content %}
+  <h2>ユーザ登録</h2>
+  <form method="post">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% bootstrap_button button_type="submit" content="ユーザ登録" %}
+  </form>
+  <a href="/">HOMEへ</a>
+{% endblock %}
+
+
+
+
+
+
+
+<!-- chat GTPの出力 -->
+
+<!-- html  -->
+<!-- <form>
+    <div>
+      <label for="name">名前:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+      <label for="email">メールアドレス:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="password">パスワード:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+      <label for="confirm_password">パスワードの確認:</label>
+      <input type="password" id="confirm_password" name="confirm_password" required>
+    </div>
+    <button type="submit">送信</button>
+  </form> -->
+
+  <!-- css -->
+  <!-- form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #ccc;
+  }
+  
+  div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  } -->
+  

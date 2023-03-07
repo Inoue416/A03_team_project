@@ -36,7 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
+    
+    # third party
+    'django_bootstrap5',
+    
+    # Our Project
+    'app',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +60,7 @@ ROOT_URLCONF = 'a03_team_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,9 +130,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTHENTICATION_BACKENDS = [ 
-#   'django.contrib.auth.backends.ModelBackend',     
+AUTHENTICATION_BACKENDS = [
+  'accounts.backends.EmailAuthenticationBackend',
+  'django.contrib.auth.backends.ModelBackend',
 #   'allauth.account.auth_backends.AuthenticationBackend',
-# ] 
+] 
 
 AUTH_USER_MODEL = 'app.User'
+
+LOGIN_URL = 'accounts/login/'
+LOGOUT_URL = 'accounts/logout/'
+LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
