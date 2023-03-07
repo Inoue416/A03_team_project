@@ -9,9 +9,8 @@ services:
     # HACK:個々の./tmpはDjangoのプロジェクト名次第で変更
     volumes:
       - ./a03_team_project:/app
-    # command memo: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py loaddata universities.json && python manage.py runserver 0.0.0.0:8000"
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py loaddata universities.json && python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=db
       - DB_NAME=devdb
