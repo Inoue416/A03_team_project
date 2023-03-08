@@ -69,7 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         app_label = 'app'
     
     # Fields
-    name = models.CharField(verbose_name='名前',max_length=255, unique=True)
+    name = models.CharField(verbose_name='名前',max_length=255)
     email = models.EmailField(max_length=255, unique=True)
     is_student = models.BooleanField(default=False)
     is_company = models.BooleanField(default=False)

@@ -9,8 +9,8 @@ from django.contrib import messages
 
 from accounts.forms import SignupForm, LoginForm
 
-# NOTE:使えるかも
-from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
+from django.contrib.auth import logout as auth_logout
 
 # Create your views here.
 
@@ -59,14 +59,10 @@ class LoginView(LoginView):
     
 class CustomLogoutView(LogoutView):
     
-    # HACK: templateを表示して、リダイレクトするような仕組みになっており、リダイレクトした後に（メッセージミドルウェアの）メッセージを表示できなくなってしまう。
-    # 　　メッセージを表示する対策としてtemplateにホームページのテンプレートを指定して、リダイレクトしないことによって、メッセージが表示されるような形にしている。
-    template_name = 'index.html'
-    
     def get(self, request, *args, **kwargs):
+        auth_logout(request)
         messages.info(request, 'ログアウトしました', extra_tags="primary")
-        context = self.get_context_data(**kwargs)
-        return self.render_to_response(context)
+        return HttpResponseRedirect('/')    
 
 class CustomPasswordChangeView(PasswordChangeView):
     
