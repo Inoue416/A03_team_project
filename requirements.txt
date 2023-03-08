@@ -6,3 +6,7 @@ psycopg2>=2.8.6,<2.9
 
 Pillow==9.4.0
 django-bootstrap5
+
+Markdown==3.4.1
+
+djangorestframework==3.14.0

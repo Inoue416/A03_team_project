@@ -16,9 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.urls import path
+from app.views.index_view import IndexView
+from app.views.markdown_detail_view import MarkdownDetailView
+from app.views.comment_view import CommentView
+from app.views.nice_view import NiceView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
-    path('accounts/', include('accounts.urls'))
+    path('accounts/', include('accounts.urls')),
+    path('admin/', admin.site.urls),
+    path('', IndexView.as_view(), name='index'),
+    path('markdown_detail/<int:id>', MarkdownDetailView.as_view(), name="markdown_detail"),
+    path('comment/<int:markdown_id>', CommentView.as_view(), name="comment"),
+    path('api/nice', NiceView.as_view(), name="nice")
 ]

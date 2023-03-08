@@ -17,6 +17,7 @@ from app.models import (
     Follow,
     MarkdownPost,
     Nice,
+    Comment
 )
 
 # Register your models here.
@@ -75,3 +76,4 @@ admin.site.register(DepartmentMiddle)
 admin.site.register(Follow)
 admin.site.register(MarkdownPost)
 admin.site.register(Nice)
+admin.site.register(Comment)

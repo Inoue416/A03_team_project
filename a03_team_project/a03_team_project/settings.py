@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Our Project
     'app',
     'accounts',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
