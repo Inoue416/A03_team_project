@@ -12,13 +12,15 @@ from accounts.forms import SignupForm, LoginForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout as auth_logout
 
+from django.urls import reverse_lazy
+
 # Create your views here.
 
 
 class SignUpView(CreateView):
     """サインアップのビュー"""
     form_class = SignupForm
-    success_url = '/'
+    success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
     
     # NOTE:messageの表示機能を追加したいがためのオーバライド
@@ -48,7 +50,6 @@ class LoginView(LoginView):
         Handle POST requests: instantiate a form instance with the passed
         POST variables and then check if it's valid.
         """
-        
         form = self.get_form()
         if form.is_valid():
             messages.info(request, 'ログインしました。', extra_tags="primary")
@@ -66,7 +67,7 @@ class CustomLogoutView(LogoutView):
 
 class CustomPasswordChangeView(PasswordChangeView):
     
-    success_url = '/'
+    success_url = reverse_lazy('home')
     
     def post(self, request, *args, **kwargs):
         """
