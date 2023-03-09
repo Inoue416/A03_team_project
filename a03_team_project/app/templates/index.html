@@ -2,7 +2,7 @@
 {% block title %}HOME{% endblock %}
 {% block content %}
 <div class="container">
-    <h1>HOME</h1>
+    <h1>記事一覧</h1>
     <div class="list-group">
         {% for markdown_object in markdown_objects %}
         <a href="markdown_detail/{{ markdown_object.md_data.id }}" class="row list-group-item list-group-item-action d-flex justify-content-between align-items-start">
