@@ -2,3 +2,4 @@ __pycache__/
 /*/*/migrations/*
 a03_team_project/app/migrations
 venv/
+./venv
