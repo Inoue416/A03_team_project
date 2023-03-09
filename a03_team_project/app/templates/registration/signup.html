@@ -6,13 +6,14 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
   <h2>ユーザ登録</h2>
   <form method="post">
       {% csrf_token %}
       {% bootstrap_form form %}
       {% bootstrap_button button_type="submit" content="ユーザ登録" %}
   </form>
-  <a href="/">HOMEへ</a>
+</div>
 {% endblock %}
 
 
