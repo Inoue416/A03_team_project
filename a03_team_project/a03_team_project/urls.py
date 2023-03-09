@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.urls import path
 from app.views.index_view import IndexView
 from app.views.markdown_detail_view import MarkdownDetailView
 from app.views.comment_view import CommentView
