@@ -1,0 +1,16 @@
+{% extends "profile/template.html" %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+    企業プロフィール編集
+{% endblock %}
+
+{% block content %}
+    <h2>プロフィール編集</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="プロフィール編集" %}
+    </form>
+    <a href="/">HOMEへ</a>
+{% endblock %}

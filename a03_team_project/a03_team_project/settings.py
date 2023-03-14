@@ -24,7 +24,7 @@ SECRET_KEY = 'example'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     # Our Project
     'app',
     'accounts',
-    'rest_framework'
+    'rest_framework',
+    'django_bootstrap5',
+    'profiles'
 ]
 
 MIDDLEWARE = [
@@ -61,7 +63,7 @@ ROOT_URLCONF = 'a03_team_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,3 +145,6 @@ LOGIN_URL = 'accounts/login/'
 LOGOUT_URL = 'accounts/logout/'
 LOGIN_REDIRECT_URL = '/'
 # LOGOUT_REDIRECT_URL = '/'
+# プロフィールの画像をを保存
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
