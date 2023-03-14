@@ -9,7 +9,7 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-1 mt-3">
             <div class="row">
                 <i class="nice-area text-center bi bi-heart" style="cursor: hand; cursor: pointer; font-size: 2.0rem;"></i>
@@ -21,20 +21,61 @@
             </div>
         </div>
         <div class="col-11">
-            <h1>タイトル: {{ markdown_object.title }}</h1>
-            <div class="markdown-area mt-3"></div>
+            <h1 class="border border-dark p-2">タイトル: {{ markdown_object.title }}</h1>
+            <div class="markdown-area mt-3 border border-dark p-2"></div>
             <div class="mt-3 d-flex justify-content-end">
+                {% if markdown_object.user.id == request.user.id %}
+                    <a href="#" type="button" class="me-3 btn btn-outline-secondary">編集</a>
+                {% endif %}
                 <a href="{% url 'comment' markdown_object.id %}" type="button" class="btn btn-outline-success">コメント</a>
             </div>
             <div class="container">
                 <b><h3>コメント</h3></b>
-                    <span class="border-bottom-1 border-secondary"></span>
-                <ul>
-                {% for comment_object in comment_objects %}
-                    <li>{{ comment_object.comment }}</li>
-                {% endfor %}
+                <ul class="list-group">
+                    {% for page_object in page_objects %}
+                    <li class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <b class="mb-1">{{ page_object.user.name }}</b>
+                            <small>{{ page_object.created_at }}</small>
+                        </div>
+                        <div class="d-flex w-100 justify-content-between">
+                            <p class="mb-1">{{ page_object.comment }}</p>
+                            {% if page_object.user.id == request.user.id %}
+                                <a class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                            {% endif %}
+                        </div>
+                    </li>
                 </ul>
-                <!-- TODO コメントデータの表示-->
+                {% endfor %}
+                <div class="mt-3">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if page_objects.has_previous %}
+                                <li><a class="page-link text-primary d-inline-block" href="?page={{ page_objects.previous_page_number }}"><</a></li>
+                            {% else %}
+                                <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#"><</div></li>
+                            {% endif %}
+                
+                            {% for link_page in page_objects.paginator.page_range %}
+                                {% if link_page %}
+                                    {% if link_page == page_objects.number %}
+                                        <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">{{ link_page }}</div></li>
+                                    {% else %}
+                                        <li><a class="page-link text-primary d-inline-block" href="?page={{ link_page }}">{{ link_page }}</a></li>
+                                    {% endif %}
+                                {% else %}
+                                    <li class="disabled"><a class="page-link text-secondary d-inline-block text-muted" href="#">・・・</a></li>
+                                {% endif %}
+                            {% endfor %}
+                
+                            {% if page_objects.has_next %}
+                                <li><a class="page-link text-primary d-inline-block" href="?page={{ page_objects.next_page_number }}">></a></li>
+                            {% else %}
+                                <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">></div></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>                        <!-- TODO コメントデータの表示-->
             </div>            
         </div>
     </div>    
