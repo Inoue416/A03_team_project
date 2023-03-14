@@ -24,7 +24,7 @@ SECRET_KEY = 'example'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -36,7 +36,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
+    
+    # third party
+    'django_bootstrap5',
+    
+    # Our Project
+    'app',
+    'accounts',
+    'rest_framework',
+    'profiles'
 ]
 
 MIDDLEWARE = [
@@ -124,9 +132,18 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTHENTICATION_BACKENDS = [ 
-#   'django.contrib.auth.backends.ModelBackend',     
+AUTHENTICATION_BACKENDS = [
+  'accounts.backends.EmailAuthenticationBackend',
+  'django.contrib.auth.backends.ModelBackend',
 #   'allauth.account.auth_backends.AuthenticationBackend',
-# ] 
+] 
 
 AUTH_USER_MODEL = 'app.User'
+
+LOGIN_URL = 'accounts/login/'
+LOGOUT_URL = 'accounts/logout/'
+LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
+# プロフィールの画像をを保存
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

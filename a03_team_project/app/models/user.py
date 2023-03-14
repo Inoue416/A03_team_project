@@ -39,10 +39,10 @@ class UserManager(BaseUserManager):
         
         return user
         
-    def create_superuser(self, name, password):
+    def create_superuser(self, email, password):
         # 名無しのハンドル
-        if not name:
-            raise ValueError('名前が含まれていません')
+        if not email:
+            raise ValueError('Emailアドレスがが含まれていません')
         # emailなしのハンドル
         # NOTE:Django Adminで用意されている。superuser作成はnameとpasswordだけなので、その使用に合わせるためにemailを削除
         # HACK：もし、Emailも欲しいなら、しっかりクラスをたどって、自作していく必要がある。
@@ -53,7 +53,7 @@ class UserManager(BaseUserManager):
             raise ValueError('パスワードが設定されていません')
         
                 
-        user = self.model(name=name)
+        user = self.model(email=email)
         user.set_password(password)
         user.is_staff = True
         user.is_superuser = True
@@ -69,7 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         app_label = 'app'
     
     # Fields
-    name = models.CharField(verbose_name='名前',max_length=255, unique=True)
+    name = models.CharField(verbose_name='名前',max_length=255)
     email = models.EmailField(max_length=255, unique=True)
     is_student = models.BooleanField(default=False)
     is_company = models.BooleanField(default=False)
@@ -83,7 +83,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     # username field
     # HACK:被るとwarningが出る。（nameをuniqueにすることでどうにか、ハンドル）
-    USERNAME_FIELD = 'name'
+    USERNAME_FIELD = 'email'
     
     # NOTE:名前だけだと、可能性があるので、idとnameにオーバライド
     def __str__(self):

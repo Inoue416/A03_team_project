@@ -14,8 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from app.views.index_view import IndexView
+from app.views.markdown_detail_view import MarkdownDetailView
+from app.views.comment_view import CommentView
+from app.views.nice_view import NiceView
+from app.views.delete_comment_view import DeleteCommentView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('', IndexView.as_view(), name='home'),
+    path('accounts/', include('accounts.urls')),
+    path('admin/', admin.site.urls),
+    path('markdown_detail/<int:id>', MarkdownDetailView.as_view(), name="markdown_detail"),
+    path('comment/<int:markdown_id>', CommentView.as_view(), name="comment"),
+    path('api/nice', NiceView.as_view(), name="nice"),
+    path('<int:pk>/delete_comment/<int:markdown_id>', DeleteCommentView.as_view(), name="delete_comment"),
+    path('profiles/', include('profiles.urls'))
 ]
