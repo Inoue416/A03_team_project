@@ -1,10 +1,10 @@
-# from django.shortcuts import render
+from django.shortcuts import redirect
 from ssl import get_server_certificate
 from django.views.generic.edit import CreateView
-from app.models import Universities, Grade, StudentProfile
+from app.models import Universities, Grade, StudentProfile, User
 
-from profiles.forms import CompanyForm, StudentMultiForm
-from extra_views import InlineFormSetFactory, CreateWithInlinesView
+from profiles.forms import CompanyForm#, StudentMultiForm
+# from extra_views import InlineFormSetFactory, CreateWithInlinesView
 
 class CompanyProfileCreateView(CreateView):
     template_name = 'profile/company.html'
@@ -12,13 +12,14 @@ class CompanyProfileCreateView(CreateView):
     success_url = '/'
 
     def post(self, request, *args, **kwargs):
+        self.object = None
         form = self.get_form()
-
-        if form.is_valid():
+        print('is company?')
+        print(self.request.user.is_company)
+        if form.is_valid() and self.request.user.is_company:
             qryset = form.save(commit=False)
-            qryset.company_id = self.request.user
+            qryset.company_id = self.request.user.id
             qryset.save()
-
             return self.form_valid(form)
 
         else:

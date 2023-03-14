@@ -1,5 +1,5 @@
 from django.urls import path
-from profiles.views import CompanyProfileCreateView, StudentProfileCreateView
+from profiles.views import CompanyProfileCreateView#, StudentProfileCreateView
 
 
 urlpatterns = [

@@ -1,9 +1,9 @@
 from dataclasses import fields
 from this import s
 from django import forms
-from betterforms.multiform import MultiModelForm
+# from betterforms.multiform import MultiModelForm
 
-from app.models import CompanyProfile, StudentProfile, Universities, Grade
+from app.models import CompanyProfile, StudentProfile, Universities, Grade, User
 
 class CompanyForm(forms.ModelForm):
 
@@ -19,22 +19,21 @@ class CompanyForm(forms.ModelForm):
         }
 
         def __init__(self, user, *args, **kwargs):
-            self.login_user = user
+            # self.login_user = user
+            self.sample_id = self.request.user.id
             super().__init__(*args, **kwargs)
 
         def save(self, **kwargs):
-
-            company = CompanyProfile(
-                    outline = self.cleaned_data['outline'],
-                    businness_contents = self.cleaned_data['businness_contents'],
-                    image = self.cleaned_data['image'],
-                    homepage = self.cleaned_data['homepage'],
-                )
-
-            company.save()  
-
-
-            return company
+            # company = CompanyProfile(
+            #         company = User.objects.get(id=self.request.user.id),
+            #         outline = self.cleaned_data['outline'],
+            #         businness_contents = self.cleaned_data['businness_contents'],
+            #         image = self.cleaned_data['image'],
+            #         homepage = self.cleaned_data['homepage'],
+            #     )
+            print('company profile save...')
+            # company.save()
+            # return company
 
 # class StudentForm(forms.ModelForm):
 #     class Meta:
