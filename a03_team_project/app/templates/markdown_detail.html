@@ -41,7 +41,7 @@
                         <div class="d-flex w-100 justify-content-between">
                             <p class="mb-1">{{ page_object.comment }}</p>
                             {% if page_object.user.id == request.user.id %}
-                                <a class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                                <a href="{% url 'delete_comment' page_object.id page_object.markdown.id %}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
                             {% endif %}
                         </div>
                     </li>
