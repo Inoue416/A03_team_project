@@ -1,4 +1,4 @@
-{% extends "profile/template.html" %}
+{% extends "base.html" %}
 {% load django_bootstrap5 %}
 
 {% block title %}
@@ -6,11 +6,12 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
     <h2>プロフィール編集</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button button_type="submit" content="プロフィール編集" %}
     </form>
-    <a href="/">HOMEへ</a>
+</div>
 {% endblock %}
