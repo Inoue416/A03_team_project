@@ -8,7 +8,7 @@ class CommentView(FormView):
     form_class = CommentForm
 
     def get_success_url(self):
-        return reverse_lazy("markdown_detail", kwargs={"id": self.kwargs.get('markdown_id')})  # TODO: 成功時のURLを入れる
+        return reverse_lazy("markdown_detail", kwargs={"id": self.kwargs.get('markdown_id')})
 
     def form_valid(self, form):
         form.save(self.request.user.id)
