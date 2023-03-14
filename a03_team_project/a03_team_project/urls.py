@@ -19,6 +19,7 @@ from app.views.index_view import IndexView
 from app.views.markdown_detail_view import MarkdownDetailView
 from app.views.comment_view import CommentView
 from app.views.nice_view import NiceView
+from app.views.delete_comment_view import DeleteCommentView
 
 
 urlpatterns = [
@@ -29,5 +30,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('markdown_detail/<int:id>', MarkdownDetailView.as_view(), name="markdown_detail"),
     path('comment/<int:markdown_id>', CommentView.as_view(), name="comment"),
-    path('api/nice', NiceView.as_view(), name="nice")
+    path('api/nice', NiceView.as_view(), name="nice"),
+    path('<int:pk>/delete_comment/<int:markdown_id>', DeleteCommentView.as_view(), name="delete_comment")
 ]
