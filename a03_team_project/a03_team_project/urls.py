@@ -34,5 +34,5 @@ urlpatterns = [
     path('api/nice', NiceView.as_view(), name="nice"),
     path('<int:pk>/delete_comment/<int:markdown_id>', DeleteCommentView.as_view(), name="delete_comment"),
     path('profiles/', include('profiles.urls')),
-    path("formpage/", formpage),
+    path("formpage/", formpage, name="formpage")
 ]
