@@ -22,7 +22,7 @@
           <div class="navbar-nav">
             {% if request.user.is_authenticated %}
             <a class="nav-link" href="{% url 'home' %}">ホーム</a>
-            <a class="nav-link" href="#">投稿</a>
+            <a class="nav-link" href="{% url 'formpage' %}">投稿</a>
             {% if request.user.is_student %}
               <a class="nav-link" href="#">プロフィール設定</a>
             {% elif request.user.is_company %}
